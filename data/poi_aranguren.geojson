@@ -1,0 +1,15 @@
+{
+"type": "FeatureCollection",
+"name": "poi_aranguren",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "photo": "data/pois/aranguren/06.jpg", "description": "Construction starts early in the morning and ends late into the night in order to finish the development. Machinery like bulldozers and excavators are routinely seen in areas the were once farm-lots." }, "geometry": { "type": "Point", "coordinates": [ 120.531618611111114, 15.335783055555556, 118.0 ] } },
+{ "type": "Feature", "properties": { "photo": "data/pois/aranguren/07.jpg", "description": "Some parts of Aranguren have yet to be claimed by the BCDA. The people continue to cultivate these areas even without assurance as to until when they will be able to." }, "geometry": { "type": "Point", "coordinates": [ 120.54792888888889, 15.345581944444445, 94.0 ] } },
+{ "type": "Feature", "properties": { "photo": "data/pois/aranguren/01.JPG", "description": "The National Government Administrative Center is a 200-hectare facility located inside an area called the Civic Center where public services, sports facilities, and private structures are centered." }, "geometry": { "type": "Point", "coordinates": [ 120.527668436385255, 15.345448079418151, 0.0 ] } },
+{ "type": "Feature", "properties": { "photo": "data/pois/aranguren/02.JPG", "description": "Trees are marked to estimate the value of the land being claimed by the Bases Conversion and Development Authority (BCDA). Different kinds of trees have different prices." }, "geometry": { "type": "Point", "coordinates": [ 120.528900153277249, 15.339546988336215, 0.0 ] } },
+{ "type": "Feature", "properties": { "photo": "data/pois/aranguren/03.JPG", "description": "In order to maintain the rate of construction and development on the site, facilities like these Cement Batching Plant of BGC company were put up in areas that used to be farm lands." }, "geometry": { "type": "Point", "coordinates": [ 120.528072439525772, 15.335156696472483, 0.0 ] } },
+{ "type": "Feature", "properties": { "photo": "data/pois/aranguren/04.jpg", "description": "Apartment and housing units for workers in the construction of New Clark City are being built on old farm-lots." }, "geometry": { "type": "Point", "coordinates": [ 120.52901839809887, 15.333161078763004, 0.0 ] } },
+{ "type": "Feature", "properties": { "photo": "data/pois/aranguren/05.jpg", "description": "What used to be hills and mountains were flattened and excavated to be used as raw materials for the development." }, "geometry": { "type": "Point", "coordinates": [ 120.528249806758254, 15.329549912558667, 0.0 ] } },
+{ "type": "Feature", "properties": { "photo": "data/pois/aranguren/08.jpg", "description": "Agents of BCDA go around the area to talk to the residents about getting their lands and to subsequently measure their lots." }, "geometry": { "type": "Point", "coordinates": [ 120.52095804275757, 15.331526558631893, 0.0 ] } }
+]
+}

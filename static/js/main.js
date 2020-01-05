@@ -1,22 +1,22 @@
 $(document).ready(function() {
 
-var osm_mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+var osmMapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	maxZoom: 19,
 	attribution: "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
 })
 
-var open_topo = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+var openTopo = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
 	maxZoom: 17,
 	attribution: "Map data: &copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors, <a href='http://viewfinderpanoramas.org'>SRTM</a> | Map style: &copy; <a href='https://opentopomap.org'>OpenTopoMap</a> (<a href='https://creativecommons.org/licenses/by-sa/3.0/'>CC-BY-SA</a>)"
 })
 
-var ncc_extent = new L.GeoJSON.AJAX('data/ncc_extent.geojson', {
+var nccExtent = new L.GeoJSON.AJAX('data/ncc_extent.geojson', {
     style: function(feature) {
         return {color: '#333333', fillOpacity: 0.0, weight: 2}
     }
 })
 
-var ncc_zoning = new L.GeoJSON.AJAX('data/ncc_zoning.geojson', {
+var nccZoning= new L.GeoJSON.AJAX('data/ncc_zoning.geojson', {
     style: function(feature) {
         switch (feature.properties.ZONE) {
            case 'Buffer Zone':   return {color: '#333333', fillColor: '#ff7f00', fillOpacity: 0.75, weight: 1.0}
@@ -42,43 +42,74 @@ var ncc_zoning = new L.GeoJSON.AJAX('data/ncc_zoning.geojson', {
        }
    },
    onEachFeature: function (feature, layer) {
-        layer.bindPopup('<b>Zoning:</b> ' +feature.properties.ZONE);
+        layer.bindPopup('<b>Zoning:</b> ' +feature.properties.ZONE)
     }
 })
 
-var ncc_flood_mgb = new L.GeoJSON.AJAX('data/ncc_flood_mgb.geojson', {
+var nccFloodMGB = new L.GeoJSON.AJAX('data/ncc_flood_mgb.geojson', {
     style: function(feature) {
         switch (feature.properties.FloodSusc) {
-            case 'Low':   return {color: '#ffff02', fillOpacity: 0.75, weight: 1};
-            case 'Moderate':   return {color: '#e69800', fillOpacity: 0.75, weight: 1};
-            case 'High':   return {color: '#e60000', fillOpacity: 0.75, weight: 1};
-            case 'Very High':  return {color: '#e427d8', fillOpacity: 0.75, weight: 1};
+            case 'Low':   return {color: '#ffff02', fillOpacity: 0.75, weight: 1}
+            case 'Moderate':   return {color: '#e69800', fillOpacity: 0.75, weight: 1}
+            case 'High':   return {color: '#e60000', fillOpacity: 0.75, weight: 1}
+            case 'Very High':  return {color: '#e427d8', fillOpacity: 0.75, weight: 1}
         }
     },
     onEachFeature: function (feature, layer) {
-        layer.bindPopup('<b>Flood Susceptibility:</b> ' +feature.properties.FloodSusc);
+        layer.bindPopup('<b>Flood Susceptibility:</b> ' +feature.properties.FloodSusc)
     }
 })
 
-var ncc_landslide_mgb = new L.GeoJSON.AJAX('data/ncc_landslide_mgb.geojson', {
+var nccLandslideMGB = new L.GeoJSON.AJAX('data/ncc_landslide_mgb.geojson', {
     style: function(feature) {
         switch (feature.properties.LndslideSu) {
-            case 'Low':   return {color: '#ffff02', fillOpacity: 0.75, weight: 1};
-            case 'Moderate':   return {color: '#e69800', fillOpacity: 0.75, weight: 1};
-            case 'High':   return {color: '#e60000', fillOpacity: 0.75, weight: 1};
-            case 'Very High':  return {color: '#e427d8', fillOpacity: 0.75, weight: 1};
+            case 'Low':   return {color: '#ffff02', fillOpacity: 0.75, weight: 1}
+            case 'Moderate':   return {color: '#e69800', fillOpacity: 0.75, weight: 1}
+            case 'High':   return {color: '#e60000', fillOpacity: 0.75, weight: 1}
+            case 'Very High':  return {color: '#e427d8', fillOpacity: 0.75, weight: 1}
         }
     },
     onEachFeature: function (feature, layer) {
-        layer.bindPopup('<b>Landslide Susceptibility:</b> ' +feature.properties.LndslideSu);
+        layer.bindPopup('<b>Landslide Susceptibility:</b> ' +feature.properties.LndslideSu)
+    }
+})
+
+var poiIcon = new L.Icon({
+	iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+	shadowUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-shadow.png',
+	iconSize: [25, 41],
+	iconAnchor: [12, 41],
+	popupAnchor: [1, -34],
+	shadowSize: [41, 41]
+});
+
+var poiAranguren = new L.GeoJSON.AJAX('data/poi_aranguren.geojson', {
+	pointToLayer: function (feature, latlng) {
+        return L.marker(latlng, {icon: poiIcon})
+    },
+	onEachFeature: function (feature, layer) {
+        layer.bindPopup('<img src="' + feature.properties.photo + '" width="420"></img><hr>' + feature.properties.description, {
+			minWidth: 420,
+		})
+    }
+})
+
+var poiAlli = new L.GeoJSON.AJAX('data/poi_alli.geojson', {
+	pointToLayer: function (feature, latlng) {
+        return L.marker(latlng, {icon: poiIcon})
+    },
+	onEachFeature: function (feature, layer) {
+        layer.bindPopup('<img src="' + feature.properties.photo + '" width="420"></img><hr>' + feature.properties.description, {
+			minWidth: 420,
+		})
     }
 })
 
 var baseTree = {
     label: '<b>BASEMAPS</b>',
     children: [
-        {label: 'OpenStreetMap Mapnik', layer: osm_mapnik},
-        {label: 'OpenTopoMap', layer: open_topo},
+        {label: 'OpenStreetMap Mapnik', layer: osmMapnik},
+        {label: 'OpenTopoMap', layer: openTopo},
     ]
 }
 
@@ -90,16 +121,24 @@ var overlayTree = {
             label: '<b>New Clark City</b>',
             selectAllCheckbox: true,
             children: [
-                {label: 'Extent', layer: ncc_extent},
-                {label: 'Zoning', layer: ncc_zoning},
+                {label: 'Extent', layer: nccExtent},
+                {label: 'Zoning', layer: nccZoning},
+            ]
+        },
+		{
+            label: '<b>Points of Interest</b>',
+            selectAllCheckbox: true,
+            children: [
+                {label: 'Aranguren', layer: poiAranguren},
+				{label: 'Alli', layer: poiAlli},
             ]
         },
         {
             label: '<b>Hazards (Mines and Geosciences Bureau)</b>',
             selectAllCheckbox: true,
             children: [
-                {label: 'Flood (MGB)', layer: ncc_flood_mgb},
-                {label: 'Landslide (MGB)', layer: ncc_landslide_mgb},
+                {label: 'Flood (MGB)', layer: nccFloodMGB},
+                {label: 'Landslide (MGB)', layer: nccLandslideMGB},
             ]
         }
     ]
@@ -113,7 +152,7 @@ var map = L.map('map', {
         [15.16, 120.33],
         [15.45, 120.64]
     ],
-    layers: [osm_mapnik, ncc_extent, ncc_zoning]
+    layers: [osmMapnik, nccExtent, nccZoning]
 })
 
 L.control.layers.tree(baseTree, overlayTree).addTo(map)
