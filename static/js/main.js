@@ -107,7 +107,7 @@ var overlayTree = {
 
 var map = L.map('map', {
     center: [15.2950, 120.4892],
-    zoom: 13,
+    zoom: 12,
     minZoom: 12,
     maxBounds: [
         [15.16, 120.33],
